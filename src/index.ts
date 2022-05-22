@@ -5,12 +5,12 @@ type IndexIdType = number;
 /**
  * Multi Index Map data structure
  *
- * @class MultiIndexMap
+ * @class NIndexMap
  * @template DataType
  * @template IndexedProp
  * @template DataPropValue
  */
-class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
+class NIndexMap<DataType, IndexedProp extends keyof DataType> {
     /**
      * Main data element mapping
      *
@@ -28,7 +28,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     private readonly indexMap: Map<IndexedProp, Map<DataType[IndexedProp], number>> = new Map();
 
     /**
-     * Creates an instance of MultiIndexMap.
+     * Creates an instance of NIndexMap.
      *
      * @param {IndexedProp[]} [indexKeys=[]] optional array of keys on the target object to index.
      * @param {DataType[]} [initialData=[]] optional array of initial data objects to store.
@@ -77,7 +77,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     }
 
     /**
-     * Adds one or more elements to the MultiIndexMap store.
+     * Adds one or more elements to the NIndexMap store.
      *
      * @template T
      * @param {...T[]} dataItems
@@ -93,7 +93,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     }
 
     /**
-     * Removes the element from the MultiIndexMap store that matches the
+     * Removes the element from the NIndexMap store that matches the
      * specified key and value provided.
      *
      * @param {IndexedProp} key
@@ -146,7 +146,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     }
 
     /**
-     * Returns the size of the MultiIndexMap.
+     * Returns the size of the NIndexMap.
      *
      * @returns {*}  {number}
      */
@@ -155,7 +155,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     }
 
     /**
-     * Returns the size of the indexes maintained by the MultiIndexMap.
+     * Returns the size of the indexes maintained by the NIndexMap.
      *
      * @returns {*}  {number}
      */
@@ -165,7 +165,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
 
     /**
      * Returns a new iterator object that contains the values for each element
-     * in the MultiIndexMap in insertion order.
+     * in the NIndexMap in insertion order.
      *
      * @returns {*}  {IterableIterator<DataType>}
      */
@@ -175,7 +175,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
 
     /**
      * Returns a new iterator object that contains the [key, value] pairs for
-     * each element in the MultiIndexMap in insertion order. In this particular
+     * each element in the NIndexMap in insertion order. In this particular
      * case, this iterator object is also an iterable, so the for-of loop can be
      * used.
      *
@@ -186,7 +186,7 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     }
 
     /**
-     * Clears all elements and indexes from the MultiIndexMap.
+     * Clears all elements and indexes from the NIndexMap.
      *
      * @returns {*}  {void}
      */
@@ -206,4 +206,4 @@ class MultiIndexMap<DataType, IndexedProp extends keyof DataType> {
     }
 }
 
-export default MultiIndexMap;
+export default NIndexMap;

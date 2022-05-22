@@ -1,4 +1,4 @@
-import MultiIndexMap from "../src/index";
+import NIndexMap from "../src/index";
 import { createMock } from "ts-auto-mock";
 
 interface TestInterface {
@@ -10,30 +10,11 @@ interface TestInterface {
     data3?: object;
 }
 
-const initialData: TestInterface[] = [
-    {
-        stringId: "1",
-        numberId: 1,
-        data1: "foo data",
-        data2: 1001
-    },
-    {
-        stringId: "2",
-        numberId: 2,
-        data1: "bar data",
-        data2: 2002
-    }
-];
-
-const exampleMap = new MultiIndexMap<TestInterface, "stringId" | "numberId">(["stringId", "numberId"], initialData);
-
-const resMock1 = exampleMap.get("stringId", "1");
-
 const stringIndex = "stringId";
 const numberIndex = "numberId";
 const objectIndex = "objectId";
 
-describe("MultiIndexMap", () => {
+describe("NIndexMap", () => {
     let mock1: TestInterface;
     let mock2: TestInterface;
     let mock3: TestInterface;
@@ -45,7 +26,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("call constructor (infer typing), load data, and fetch result via string index", () => {
-        const sut = new MultiIndexMap([stringIndex], [mock1, mock2, mock3]);
+        const sut = new NIndexMap([stringIndex], [mock1, mock2, mock3]);
         const resMock1 = sut.get(stringIndex, mock1.stringId);
         const resMock2 = sut.get(stringIndex, mock2.stringId);
         const resMock3 = sut.get(stringIndex, mock3.stringId);
@@ -55,7 +36,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("call constructor (explicit typing), load data, and fetch result via different indexes", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId" | "numberId" | "objectId">(
+        const sut = new NIndexMap<TestInterface, "stringId" | "numberId" | "objectId">(
             [stringIndex, numberIndex, objectIndex],
             [mock1, mock2, mock3]
         );
@@ -68,7 +49,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("call constructor (explicit typing), load data, and iterate over entries", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">([stringIndex], [mock1, mock2, mock3]);
+        const sut = new NIndexMap<TestInterface, "stringId">([stringIndex], [mock1, mock2, mock3]);
         const entries = sut.entries();
         expect([...entries].length).toEqual(3);
         for (const [index, mock] of entries) {
@@ -77,7 +58,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("call constructor (explicit typing), load data, and iterate over values", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">([stringIndex], [mock1, mock2, mock3]);
+        const sut = new NIndexMap<TestInterface, "stringId">([stringIndex], [mock1, mock2, mock3]);
         const values = sut.values();
         expect([...values].length).toEqual(3);
         for (const mock of values) {
@@ -86,7 +67,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("call constructor without arguments, load data, and fetch expected result", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">();
+        const sut = new NIndexMap<TestInterface, "stringId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
@@ -95,7 +76,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("add index", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">();
+        const sut = new NIndexMap<TestInterface, "stringId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
@@ -105,7 +86,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("remove index", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">();
+        const sut = new NIndexMap<TestInterface, "stringId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
@@ -116,7 +97,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("remove index that doesn't exist", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">();
+        const sut = new NIndexMap<TestInterface, "stringId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
@@ -126,7 +107,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("store duplicate data", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">();
+        const sut = new NIndexMap<TestInterface, "stringId">();
         sut.set(mock1);
         sut.set(mock1);
         sut.addIndex(stringIndex);
@@ -136,7 +117,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("clear data and indexes", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId">();
+        const sut = new NIndexMap<TestInterface, "stringId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.addIndex(stringIndex);
@@ -148,7 +129,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("has data", () => {
-        const sut = new MultiIndexMap([stringIndex, numberIndex, objectIndex], [mock1, mock2, mock3]);
+        const sut = new NIndexMap([stringIndex, numberIndex, objectIndex], [mock1, mock2, mock3]);
         const hasMock1 = sut.has(stringIndex, mock1.stringId);
         const hasMock2 = sut.has(numberIndex, mock2.numberId);
         const hasMock3 = sut.has(objectIndex, mock3.objectId);
@@ -160,7 +141,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("has data without indexes", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId" | "numberId" | "objectId">();
+        const sut = new NIndexMap<TestInterface, "stringId" | "numberId" | "objectId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
@@ -175,7 +156,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("set data", () => {
-        const sut = new MultiIndexMap([stringIndex, numberIndex, objectIndex], [mock1, mock2, mock3]);
+        const sut = new NIndexMap([stringIndex, numberIndex, objectIndex], [mock1, mock2, mock3]);
         const mock = createMock<TestInterface>();
         sut.set(mock);
         const hasMockStringIndex = sut.has(stringIndex, mock.stringId);
@@ -187,7 +168,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("delete data", () => {
-        const sut = new MultiIndexMap([stringIndex, numberIndex, objectIndex], [mock1, mock2, mock3]);
+        const sut = new NIndexMap([stringIndex, numberIndex, objectIndex], [mock1, mock2, mock3]);
         sut.delete(stringIndex, mock1.stringId);
         expect(sut.size()).toEqual(2);
         sut.delete(numberIndex, mock2.numberId);
@@ -197,7 +178,7 @@ describe("MultiIndexMap", () => {
     });
 
     it("delete data without indexes", () => {
-        const sut = new MultiIndexMap<TestInterface, "stringId" | "numberId" | "objectId">();
+        const sut = new NIndexMap<TestInterface, "stringId" | "numberId" | "objectId">();
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
