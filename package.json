@@ -16,6 +16,9 @@
     "repository": {
         "url": "git@github.com:JarvisPrestidge/multi-key-map.git"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "keywords": [
         "multi-key-map",
         "multi-index-map",
