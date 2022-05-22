@@ -19,7 +19,7 @@
   <h1 style="font-size: 3.5em" align="center">n-index-map</h1>
 
   <p align="center">
-    A multi index map implmenation in TypeScript
+    A multi index map implementation in TypeScript
     <br />
     <br />
     <a href="https://github.com/JarvisPrestidge/n-index-map/issues">Report Bug</a>
