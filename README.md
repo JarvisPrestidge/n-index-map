@@ -14,15 +14,15 @@
 
 <br />
 <div align="center">
-  <h1 align="center">multi-index-map</h1>
+  <h1 align="center">multi-key-map</h1>
 
   <p align="center">
-    A multi index map implmenation in TypeScript
+    A multi key map implmenation in TypeScript
     <br />
     <br />
-    <a href="https://github.com/JarvisPrestidge/multi-index-map/issues">Report Bug</a>
+    <a href="https://github.com/JarvisPrestidge/multi-key-map/issues">Report Bug</a>
     ·
-    <a href="https://github.com/JarvisPrestidge/multi-index-map/issues">Request Feature</a>
+    <a href="https://github.com/JarvisPrestidge/multi-key-map/issues">Request Feature</a>
   </p>
 </div>
 
@@ -59,11 +59,11 @@
 ## Installation
 
 ```bash
-$ yarn add multi-index-map
+$ yarn add multi-key-map
 ```
 
 ```bash
-$ npm install multi-index-map
+$ npm install multi-key-map
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -73,7 +73,7 @@ $ npm install multi-index-map
 Import the default `MultiIndexMap` export and instantiate a new instance. You can optionally pass an array of indexes and/or an array of initial data into the constructor, in which case MultiIndexMap will use those index keys to cache all inital and future data set on the instance. Otherwise, MultiIndexMap will behave similar to native map, that is until you to decide to add an index. 
 
 ```typescript
-import MultiIndexMap from "multi-index-map";
+import MultiIndexMap from "multi-key-map";
 
 interface TestInterface {
     stringId: string;
@@ -226,22 +226,22 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Jarvis Prestidge - jarvisprestidge@gmail.com
 
-Project Link: [https://github.com/jarvisprestidge/multi-index-map](https://github.com/jarvisprestidge/multi-index-map)
+Project Link: [https://github.com/jarvisprestidge/multi-key-map](https://github.com/jarvisprestidge/multi-key-map)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [typescript-shield]:https://img.shields.io/badge/made%20with-typescript-%23007ACC?style=for-the-badge&link=https://www.typescriptlang.org "TypeScript (External Link)"
-[contributors-shield]: https://img.shields.io/github/contributors/JarvisPrestidge/multi-index-map.svg?style=for-the-badge
-[contributors-url]: https://github.com/JarvisPrestidge/multi-index-map/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/JarvisPrestidge/multi-index-map.svg?style=for-the-badge
-[forks-url]: https://github.com/JarvisPrestidge/multi-index-map/network/members
-[stars-shield]: https://img.shields.io/github/stars/JarvisPrestidge/multi-index-map.svg?style=for-the-badge
-[stars-url]: https://github.com/JarvisPrestidge/multi-index-map/stargazers
-[issues-shield]: https://img.shields.io/github/issues/JarvisPrestidge/multi-index-map.svg?style=for-the-badge
-[issues-url]: https://github.com/JarvisPrestidge/multi-index-map/issues
-[pulls-shield]: https://img.shields.io/github/issues-pr/JarvisPrestidge/multi-index-map.svg?style=for-the-badge
-[pulls-url]: https://github.com/JarvisPrestidge/multi-index-map/pulls
-[license-shield]: https://img.shields.io/github/license/JarvisPrestidge/multi-index-map.svg?style=for-the-badge
-[license-url]: https://github.com/JarvisPrestidge/multi-index-map/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/JarvisPrestidge/multi-key-map.svg?style=for-the-badge
+[contributors-url]: https://github.com/JarvisPrestidge/multi-key-map/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/JarvisPrestidge/multi-key-map.svg?style=for-the-badge
+[forks-url]: https://github.com/JarvisPrestidge/multi-key-map/network/members
+[stars-shield]: https://img.shields.io/github/stars/JarvisPrestidge/multi-key-map.svg?style=for-the-badge
+[stars-url]: https://github.com/JarvisPrestidge/multi-key-map/stargazers
+[issues-shield]: https://img.shields.io/github/issues/JarvisPrestidge/multi-key-map.svg?style=for-the-badge
+[issues-url]: https://github.com/JarvisPrestidge/multi-key-map/issues
+[pulls-shield]: https://img.shields.io/github/issues-pr/JarvisPrestidge/multi-key-map.svg?style=for-the-badge
+[pulls-url]: https://github.com/JarvisPrestidge/multi-key-map/pulls
+[license-shield]: https://img.shields.io/github/license/JarvisPrestidge/multi-key-map.svg?style=for-the-badge
+[license-url]: https://github.com/JarvisPrestidge/multi-key-map/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png

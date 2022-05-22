@@ -1,7 +1,7 @@
 {
-    "name": "multi-index-map",
+    "name": "multi-key-map",
     "version": "0.0.1",
-    "description": "Multi index map implementation in typescript",
+    "description": "Multi key map implementation in TypeScript",
     "license": "MIT",
     "author": "Jarvis Prestidge <jarvisprestidge@gmail.com>",
     "type": "module",
@@ -14,15 +14,17 @@
         "default": "./dist/index.modern.js"
     },
     "repository": {
-        "url": "git@github.com:JarvisPrestidge/multi-index-map.git"
+        "url": "git@github.com:JarvisPrestidge/multi-key-map.git"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"
     },
     "keywords": [
+        "multi-key-map",
         "multi-index-map",
         "multi",
         "index",
+        "key",
         "map"
     ],
     "files": [
