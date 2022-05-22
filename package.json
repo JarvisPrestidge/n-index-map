@@ -16,9 +16,6 @@
     "repository": {
         "url": "git@github.com:JarvisPrestidge/multi-key-map.git"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com/"
-    },
     "keywords": [
         "multi-key-map",
         "multi-index-map",
