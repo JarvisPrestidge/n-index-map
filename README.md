@@ -16,7 +16,15 @@
 
 <br />
 <div align="center">
+<<<<<<< Updated upstream
   <h1 style="font-size: 3.5em" align="center">n-index-map</h1>
+=======
+
+  ![header-dark](https://user-images.githubusercontent.com/6669336/169810148-d25bc084-c365-484f-bb54-088f6e122dc4.svg#gh-dark-mode-only)
+
+  ![header-light](https://user-images.githubusercontent.com/6669336/169810362-1d7dffba-9ee5-4c74-891d-94480579fc0a.svg#gh-light-mode-only)
+
+>>>>>>> Stashed changes
 
   <p align="center">
     A multi index map implementation in TypeScript
