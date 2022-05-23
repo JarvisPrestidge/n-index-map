@@ -4,8 +4,7 @@
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-  [![Contributors][contributors-shield]][contributors-url]
-  [![Stargazers][stars-shield]][stars-url]
+  [![Version][version-shield]][version-url]
   [![Issues][issues-shield]][issues-url]
   [![Pulls][pulls-shield]][pulls-url]
   [![Codecov][codecov-shield]][codecov-url]
@@ -16,15 +15,11 @@
 
 <br />
 <div align="center">
-<<<<<<< Updated upstream
-  <h1 style="font-size: 3.5em" align="center">n-index-map</h1>
-=======
 
   ![header-dark](https://user-images.githubusercontent.com/6669336/169810148-d25bc084-c365-484f-bb54-088f6e122dc4.svg#gh-dark-mode-only)
 
   ![header-light](https://user-images.githubusercontent.com/6669336/169810362-1d7dffba-9ee5-4c74-891d-94480579fc0a.svg#gh-light-mode-only)
 
->>>>>>> Stashed changes
 
   <p align="center">
     A multi index map implementation in TypeScript
@@ -46,10 +41,10 @@
 
 <br />
 
-* 🔥 **Performant**
-*  ⚡ **Zero dependencies**
+* ⚡ **Performant**
+* 🔥 **Zero dependencies**
 * 🎉 **First class typescript support**
-* 🙌🏼 **Simple API similar to native `map`**
+* 🙌 **Simple API similar to native `map`**
 
 <br/>
 
@@ -244,18 +239,13 @@ Project Link: [https://github.com/jarvisprestidge/n-index-map](https://github.co
 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [typescript-shield]:https://img.shields.io/badge/made%20with-typescript-%23007ACC?style=for-the-badge&link=https://www.typescriptlang.org "TypeScript (External Link)"
-[contributors-shield]: https://img.shields.io/github/contributors/JarvisPrestidge/n-index-map.svg?style=for-the-badge
-[contributors-url]: https://github.com/JarvisPrestidge/n-index-map/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/JarvisPrestidge/n-index-map.svg?style=for-the-badge
-[forks-url]: https://github.com/JarvisPrestidge/n-index-map/network/members
-[stars-shield]: https://img.shields.io/github/stars/JarvisPrestidge/n-index-map.svg?style=for-the-badge
-[stars-url]: https://github.com/JarvisPrestidge/n-index-map/stargazers
 [issues-shield]: https://img.shields.io/github/issues/JarvisPrestidge/n-index-map.svg?style=for-the-badge
 [issues-url]: https://github.com/JarvisPrestidge/n-index-map/issues
 [pulls-shield]: https://img.shields.io/github/issues-pr/JarvisPrestidge/n-index-map.svg?style=for-the-badge
 [pulls-url]: https://github.com/JarvisPrestidge/n-index-map/pulls
 [license-shield]: https://img.shields.io/github/license/JarvisPrestidge/n-index-map.svg?style=for-the-badge
 [license-url]: https://github.com/JarvisPrestidge/n-index-map/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
 [codecov-shield]: https://img.shields.io/codecov/c/gh/JarvisPrestidge/multi-index-map?style=for-the-badge
 [codecov-url]: https://app.codecov.io/gh/JarvisPrestidge/multi-index-map
+[version-shield]: https://img.shields.io/github/package-json/v/jarvisprestidge/n-index-map?style=for-the-badge
+[version-url]: https://www.npmjs.com/package/n-index-map
