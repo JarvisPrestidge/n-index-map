@@ -18,7 +18,7 @@
   <!-- <h1 style="font-size: 3.5em" align="center">n-index-map</h1> -->
 
 
-  <img src="images/header.svg" width="800" height="400" alt="Click to see the source">
+  <img src="images/header.svg" width="800" height="200" alt="Click to see the source">
 
   <p align="center">
     A multi index map implementation in TypeScript
