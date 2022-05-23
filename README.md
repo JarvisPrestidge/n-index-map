@@ -44,7 +44,7 @@
 * ⚡ **Performant**
 * 🔥 **Zero dependencies**
 * 🎉 **First class typescript support**
-* 🙌 **Simple API similar to native `map`**
+* 📖 **Simple API similar to native `map`**
 
 <br/>
 
@@ -63,7 +63,7 @@
 
 
 
-## Installation
+## ⚙️ Installation
 
 ```bash
 $ yarn add n-index-map
@@ -75,9 +75,13 @@ $ npm install n-index-map
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Usage
+## 🔨 Usage
 
-Import the default `NIndexMap` export and instantiate a new instance. You can optionally pass an array of indexes and/or an array of initial data into the constructor, in which case NIndexMap will use those index keys to cache all inital and future data set on the instance. Otherwise, NIndexMap will behave similar to native map, that is until you to decide to add an index. 
+Import the default `NIndexMap` export and instantiate a new instance. 
+
+#### Constructor
+
+You can optionally pass an array of indexes and/or an array of initial data into the constructor, in which case NIndexMap will use those index keys to cache all inital and future data set on the instance. Otherwise, NIndexMap will behave similarly to native map, that is until you to decide to add an index. 
 
 ```typescript
 import NIndexMap from "n-index-map";
@@ -104,7 +108,9 @@ console.log(fooElement);
 // prints: {stringId: '2', numberId: 2, data: 'bar'}
 console.log(barElement);
 ```
-You have the option to specify the typings of the data you expect the NIndexMap to handle, along with the index keys when calling the constructor as generic type paramaters.
+
+#### Typing
+You have the option to specify the types of the data you expect `NIndexMap` to handle, along with the index keys when calling the constructor as generic type paramaters.
 
 > **NOTE**:  This is automatically inferred from the params if provided, but of course, without constructor params this will need to be specified for full type support.
 
@@ -125,7 +131,7 @@ console.log(barElement);
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## API
+## 📖 API
 
 ### new
 ```typescript 
@@ -205,7 +211,7 @@ Clears all elements and indexes from the NIndexMap.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Contributing
+## 💖 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -221,7 +227,7 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## License
+## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
@@ -229,7 +235,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-## Contact
+## 🤙 Contact
 
 Jarvis Prestidge - jarvisprestidge@gmail.com
 
