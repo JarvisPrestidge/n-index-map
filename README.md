@@ -15,7 +15,10 @@
 
 <br />
 <div align="center">
-  <h1 style="font-size: 3.5em" align="center">n-index-map</h1>
+  <!-- <h1 style="font-size: 3.5em" align="center">n-index-map</h1> -->
+
+
+  <img src="images/header.svg" width="800" height="400" alt="Click to see the source">
 
   <p align="center">
     A multi index map implementation in TypeScript
@@ -37,10 +40,10 @@
 
 <br />
 
-* 🔥 **Performant**
-*  ⚡ **Zero dependencies**
+* ⚡ **Performant**
+* 🔥 **Zero dependencies**
 * 🎉 **First class typescript support**
-* 🙌🏼 **Simple API similar to native `map`**
+* 🙌 **Simple API similar to native `map`**
 
 <br/>
 
