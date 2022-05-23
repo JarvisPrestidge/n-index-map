@@ -1,4 +1,4 @@
-import { isDefined } from "./guards";
+import { isDefined, isNumber, isObject, isString } from "./guards";
 
 type IndexIdType = number;
 
@@ -10,7 +10,7 @@ type IndexIdType = number;
  * @template IndexedProp
  * @template DataPropValue
  */
-class NIndexMap<DataType, IndexedProp extends keyof DataType> {
+class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
     /**
      * Main data element mapping
      *
@@ -34,8 +34,22 @@ class NIndexMap<DataType, IndexedProp extends keyof DataType> {
      * @param {DataType[]} [initialData=[]] optional array of initial data objects to store.
      */
     public constructor(indexKeys: IndexedProp[] = [], initialData: DataType[] = []) {
-        this.indexMap = new Map(indexKeys.map((index) => [index, new Map()]));
-        this.dataMap = new Map(initialData.map((data, index): [IndexIdType, DataType] => [index, data]));
+        this.indexMap = new Map(
+            indexKeys.map((indexKey) => {
+                if (!isString(indexKey) && !isNumber(indexKey)) {
+                    throw new Error("[N-INDEX-MAP ERROR] index key must be a string or number");
+                }
+                return [indexKey, new Map()];
+            })
+        );
+        this.dataMap = new Map(
+            initialData.map((data, index): [IndexIdType, DataType] => {
+                if (!isObject(data)) {
+                    throw new Error("[N-INDEX-MAP ERROR] cannot set item as it is not an object");
+                }
+                return [index, data];
+            })
+        );
 
         this.seedIndexMap(...indexKeys);
     }
@@ -84,6 +98,17 @@ class NIndexMap<DataType, IndexedProp extends keyof DataType> {
      */
     public set<T extends DataType>(...dataItems: T[]): void {
         for (const dataItem of dataItems) {
+            if (!isObject(dataItem)) {
+                throw new Error("[N-INDEX-MAP ERROR] cannot set item as it is not an object");
+            }
+            for (const indexedProperty of this.indexMap.keys()) {
+                if (!dataItem.hasOwnProperty(indexedProperty)) {
+                    throw new Error("[N-INDEX-MAP ERROR] cannot set item as does not contain indexed properties");
+                }
+                if (this.has(indexedProperty, dataItem[indexedProperty])) {
+                    throw new Error("[N-INDEX-MAP ERROR] cannot set item as indexed prop values are not unique");
+                }
+            }
             const newDataIndexId = this.dataMap.size;
             this.dataMap.set(newDataIndexId, dataItem);
             for (const indexMapItem of this.indexMap) {
@@ -195,13 +220,16 @@ class NIndexMap<DataType, IndexedProp extends keyof DataType> {
         this.indexMap.clear();
     }
 
-    private seedIndexMap(...indexProps: IndexedProp[]) {
-        for (const indexProp of indexProps) {
+    private seedIndexMap(...indexProperties: IndexedProp[]) {
+        for (const indexProperty of indexProperties) {
             const map = new Map<DataType[IndexedProp], number>();
             for (const [index, dataItem] of this.dataMap) {
-                map.set(dataItem[indexProp], index);
+                if (!dataItem.hasOwnProperty(indexProperty)) {
+                    throw new Error("[N-INDEX-MAP ERROR] cannot create index for property that does not exist on data");
+                }
+                map.set(dataItem[indexProperty], index);
             }
-            this.indexMap.set(indexProp, map);
+            this.indexMap.set(indexProperty, map);
         }
     }
 }
