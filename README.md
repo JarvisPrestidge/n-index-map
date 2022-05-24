@@ -44,7 +44,7 @@
 * ⚡ **Performant**
 * 🔥 **Zero dependencies**
 * 🎉 **First class typescript support**
-* 🙌 **Simple API similar to native `map`**
+* 📖 **Simple API similar to native `map`**
 
 <br/>
 
@@ -63,7 +63,7 @@
 
 
 
-## Installation
+## 💾 Installation
 
 ```bash
 $ yarn add n-index-map
@@ -75,9 +75,13 @@ $ npm install n-index-map
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Usage
+## 🔨 Usage
 
-Import the default `NIndexMap` export and instantiate a new instance. You can optionally pass an array of indexes and/or an array of initial data into the constructor, in which case NIndexMap will use those index keys to cache all inital and future data set on the instance. Otherwise, NIndexMap will behave similar to native map, that is until you to decide to add an index. 
+Import the default `NIndexMap` export and instantiate a new instance. 
+
+#### Constructor
+
+You can optionally pass an array of indexes and/or an array of initial data into the constructor, in which case NIndexMap will use those index keys to cache all inital and future data set on the instance. Otherwise, NIndexMap will behave similarly to native map, that is until you to decide to add an index. 
 
 ```typescript
 import NIndexMap from "n-index-map";
@@ -104,7 +108,9 @@ console.log(fooElement);
 // prints: {stringId: '2', numberId: 2, data: 'bar'}
 console.log(barElement);
 ```
-You have the option to specify the typings of the data you expect the NIndexMap to handle, along with the index keys when calling the constructor as generic type paramaters.
+
+#### Typing
+You have the option to specify the types of the data you expect `NIndexMap` to handle, along with the index keys when calling the constructor as generic type paramaters.
 
 > **NOTE**:  This is automatically inferred from the params if provided, but of course, without constructor params this will need to be specified for full type support.
 
@@ -125,7 +131,7 @@ console.log(barElement);
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## API
+## 📖 API
 
 ### new
 ```typescript 
@@ -205,23 +211,45 @@ Clears all elements and indexes from the NIndexMap.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Contributing
+## ❤️ Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this better, please fork the repo and create a pull request. 
 Don't forget to give the project a star! Thanks again!
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Tooling
+* [Changeset](https://github.com/atlassian/changesets) for changes to documentation, changelog generation, and release management.
+
+### Making a Pull Request
+
+1. Fork the project and clone your fork:
+```bash
+gh repo fork --clone
+```
+2. Create your feature branch: 
+```bash
+git checkout -b feature/AmazingFeature
+```
+3. Commit your changes: 
+```bash
+git commit -m 'Add some AmazingFeature'
+```
+4. Use the changeset cli to create a detailed description of your changes.
+```bash
+yarn changeset
+``` 
+> This will be used to generate a changelog when we publish an update. [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
+
+5. Push branch and open a Pull Request
+```bash
+gh pr create
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## License
+## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
@@ -229,7 +257,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-## Contact
+## 📫 Contact
 
 Jarvis Prestidge - jarvisprestidge@gmail.com
 
