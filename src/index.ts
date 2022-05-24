@@ -111,8 +111,8 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
             }
             const newDataIndexId = this.dataMap.size;
             this.dataMap.set(newDataIndexId, dataItem);
-            for (const indexMapItem of this.indexMap) {
-                indexMapItem[1].set(dataItem[indexMapItem[0]], newDataIndexId);
+            for (const [indexedProperty, indexPropertyMap] of this.indexMap) {
+                indexPropertyMap.set(dataItem[indexedProperty], newDataIndexId);
             }
         }
     }
