@@ -4,10 +4,10 @@ import { createMock } from "ts-auto-mock";
 interface TestInterface {
     stringId: string;
     numberId: number;
-    objectId?: object;
+    objectId: object;
     data1: string;
     data2: number;
-    data3?: object;
+    data3: object;
 }
 
 const stringIndex = "stringId";
@@ -25,7 +25,7 @@ describe("NIndexMap", () => {
         mock3 = createMock<TestInterface>();
     });
 
-    it("call constructor (infer typing), load data, and fetch result via string index", () => {
+    it("call constructor with index and data, then fetch result via string index", () => {
         const sut = new NIndexMap([stringIndex], [mock1, mock2, mock3]);
         const resMock1 = sut.get(stringIndex, mock1.stringId);
         const resMock2 = sut.get(stringIndex, mock2.stringId);
@@ -35,7 +35,27 @@ describe("NIndexMap", () => {
         expect(resMock3).toEqual(mock3);
     });
 
-    it("call constructor (explicit typing), load data, and fetch result via different indexes", () => {
+    it("call constructor with index and data, then fetch result via number index", () => {
+        const sut = new NIndexMap([numberIndex], [mock1, mock2, mock3]);
+        const resMock1 = sut.get(numberIndex, mock1.numberId);
+        const resMock2 = sut.get(numberIndex, mock2.numberId);
+        const resMock3 = sut.get(numberIndex, mock3.numberId);
+        expect(resMock1).toEqual(mock1);
+        expect(resMock2).toEqual(mock2);
+        expect(resMock3).toEqual(mock3);
+    });
+
+    it("call constructor with index and data, then fetch result via object index", () => {
+        const sut = new NIndexMap([objectIndex], [mock1, mock2, mock3]);
+        const resMock1 = sut.get(objectIndex, mock1.objectId);
+        const resMock2 = sut.get(objectIndex, mock2.objectId);
+        const resMock3 = sut.get(objectIndex, mock3.objectId);
+        expect(resMock1).toEqual(mock1);
+        expect(resMock2).toEqual(mock2);
+        expect(resMock3).toEqual(mock3);
+    });
+
+    it("call constructor (explicit typing) with index and data, then fetch result via different indexes", () => {
         const sut = new NIndexMap<TestInterface, "stringId" | "numberId" | "objectId">(
             [stringIndex, numberIndex, objectIndex],
             [mock1, mock2, mock3]
@@ -48,7 +68,7 @@ describe("NIndexMap", () => {
         expect(resMock3).toEqual(mock3);
     });
 
-    it("call constructor (explicit typing), load data, and iterate over entries", () => {
+    it("call constructor (explicit typing) with index and data, then iterate over entries", () => {
         const sut = new NIndexMap<TestInterface, "stringId">([stringIndex], [mock1, mock2, mock3]);
         const entries = sut.entries();
         expect([...entries].length).toEqual(3);
@@ -57,7 +77,7 @@ describe("NIndexMap", () => {
         }
     });
 
-    it("call constructor (explicit typing), load data, and iterate over values", () => {
+    it("call constructor (explicit typing) with index and data, then iterate over values", () => {
         const sut = new NIndexMap<TestInterface, "stringId">([stringIndex], [mock1, mock2, mock3]);
         const values = sut.values();
         expect([...values].length).toEqual(3);
@@ -71,6 +91,22 @@ describe("NIndexMap", () => {
         sut.set(mock1);
         sut.set(mock2);
         sut.set(mock3);
+        const res = sut.get(stringIndex, mock1.stringId);
+        expect(res).toEqual(mock1);
+    });
+
+    it("call constructor with just index, load data, and fetch expected result", () => {
+        const sut = new NIndexMap<TestInterface, "stringId">(["stringId"]);
+        sut.set(mock1);
+        sut.set(mock2);
+        sut.set(mock3);
+        const res = sut.get(stringIndex, mock1.stringId);
+        expect(res).toEqual(mock1);
+    });
+
+    it("call constructor with just initial data, add index, and fetch expected result", () => {
+        const sut = new NIndexMap<TestInterface, "stringId">(undefined, [mock1, mock2, mock3]);
+        sut.addIndex("stringId");
         const res = sut.get(stringIndex, mock1.stringId);
         expect(res).toEqual(mock1);
     });
@@ -188,5 +224,47 @@ describe("NIndexMap", () => {
         expect(sut.size()).toEqual(1);
         sut.delete(objectIndex, mock3.objectId);
         expect(sut.size()).toEqual(0);
+    });
+});
+
+describe("NIndexMap Input Validation", () => {
+    let mock1: TestInterface;
+    let mock2: TestInterface;
+    let mock3: TestInterface;
+
+    beforeEach(() => {
+        mock1 = createMock<TestInterface>();
+        mock2 = createMock<TestInterface>();
+        mock3 = createMock<TestInterface>();
+    });
+
+    it("call constructor with index that isn't of type string or number should fail", () => {
+        // @ts-ignore: required to bypass type inference on parameters
+        expect(() => new NIndexMap([{ a: "test" }])).toThrow();
+    });
+
+    it("call constructor with data that isn't of type object should fail", () => {
+        // @ts-ignore: required to bypass type inference on parameters
+        expect(() => new NIndexMap(undefined, [1, 2, 3])).toThrow();
+    });
+
+    it("call set with data that isn't of type object should fail", () => {
+        // @ts-ignore: required to bypass type inference on parameters
+        expect(() => new NIndexMap().set(1, 2, 3)).toThrow();
+    });
+
+    it("call set with data that does not contain indexed properties", () => {
+        // @ts-ignore: required to bypass type inference on parameters
+        expect(() => new NIndexMap([numberIndex]).set({ a: "test " })).toThrow();
+    });
+
+    it("call set with data whose indexed properties values are not unique", () => {
+        // @ts-ignore: required to bypass type inference on parameters
+        expect(() => new NIndexMap([numberIndex], [{ numberId: 1 }]).set({ numberId: 1 })).toThrow();
+    });
+
+    it("call constructor with initial data, add index that doesn't exist on data type, should fail", () => {
+        // @ts-ignore: required to bypass type inference on parameter
+        expect(() => new NIndexMap(undefined, [mock1, mock2, mock3]).addIndex("random")).toThrow();
     });
 });
