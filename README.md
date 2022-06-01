@@ -44,7 +44,7 @@
 * ⚡ **Performant**
 * 🔥 **Zero dependencies**
 * 🎉 **First class typescript support**
-* 📖 **Simple API similar to native `map`**
+* 📖 **Simple fluent API similar to native `map`**
 
 <br/>
 
@@ -151,27 +151,45 @@ get(key: IndexedProp, value: DataType[IndexedProp]): DataType | undefined
 ```
 > Returns a element with the specified key and value (indexed or not) if it exists in the store.
 
+### getOrDefault
+```typescript 
+getOrDefault(key: IndexedProp, value: DataType[IndexedProp]): DataType | undefined
+```
+> Returns a element with the specified key and value (indexed or not) if it exists in the store, otherwise returns the default value when specified.
+
+### getDefault
+```typescript 
+getDefault(): DataType | undefined
+```
+> Return default value if specified
+
 ### set
 ```typescript 
-set(...dataItems: DataType[]): void
+set(...dataItems: DataType[]): this
+```
+Adds one or more elements to the NIndexMap store.
+
+### setDefault
+```typescript 
+setDefault(dataItems: DataType): this
 ```
 Adds one or more elements to the NIndexMap store.
 
 ### delete
 ```typescript 
-delete(key: IndexedProp, value: DataType[IndexedProp]): void
+delete(key: IndexedProp, value: DataType[IndexedProp]): this
 ```
 Removes the element from the NIndexMap store that matches the specified key and value provided.
 
 ### addIndex
 ```typescript 
-addIndex(key: IndexedProp): void
+addIndex(key: IndexedProp): this
 ```
 Adds new index to maintain for all currently and future added elements.
 
 ### removeIndex
 ```typescript 
-removeIndex(key: IndexedProp): void
+removeIndex(key: IndexedProp): this
 ```
 Removes an exising index.
 
