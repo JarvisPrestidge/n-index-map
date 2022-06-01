@@ -152,7 +152,9 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
      * @returns {*}  {this}
      */
     public setDefault(dataItem: DataType): this {
-        this.validateDataItem(dataItem);
+        if (!isObject(dataItem)) {
+            throw new Error("[N-INDEX-MAP ERROR] cannot set item as it is not an object");
+        }
         this.default = dataItem;
         return this;
     }
