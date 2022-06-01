@@ -1,5 +1,11 @@
 # n-index-map
 
+## 0.2.0
+
+### Minor Changes
+
+-   2f6d3c1: added support for setting and getting default elements
+
 ## 0.1.1
 
 ### Patch Changes
