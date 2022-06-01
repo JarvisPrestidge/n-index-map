@@ -236,6 +236,8 @@ describe("NIndexMap", () => {
         expect(sut.getOrDefault(stringIndex, unmatchingMock.stringId)).toEqual(defaultMock);
         sut.set(unmatchingMock);
         expect(sut.getOrDefault(stringIndex, unmatchingMock.stringId)).toEqual(unmatchingMock);
+        sut.setDefault(mock1);
+        expect(sut.getDefault()).toEqual(mock1);
     });
 });
 
@@ -278,5 +280,10 @@ describe("NIndexMap Input Validation", () => {
     it("call constructor with initial data, add index that doesn't exist on data type, should fail", () => {
         // @ts-ignore: required to bypass type inference on parameter
         expect(() => new NIndexMap(undefined, [mock1, mock2, mock3]).addIndex("random")).toThrow();
+    });
+
+    it("set default with data that isn't of type object", () => {
+        // @ts-ignore: required to bypass type inference on parameters
+        expect(() => new NIndexMap().setDefault(1)).toThrow();
     });
 });
