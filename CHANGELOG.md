@@ -1,5 +1,11 @@
 # n-index-map
 
+## 0.2.1
+
+### Patch Changes
+
+-   032d4fa: fix bug where over zealous input validation wouldn't allow a non-unqiue default value
+
 ## 0.2.0
 
 ### Minor Changes
