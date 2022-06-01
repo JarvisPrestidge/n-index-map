@@ -1,6 +1,6 @@
 {
     "name": "n-index-map",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "Multi index map implementation in TypeScript",
     "license": "MIT",
     "author": "Jarvis Prestidge <jarvisprestidge@gmail.com>",
