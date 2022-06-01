@@ -225,6 +225,18 @@ describe("NIndexMap", () => {
         sut.delete(objectIndex, mock3.objectId);
         expect(sut.size()).toEqual(0);
     });
+
+    it("set and get default value", () => {
+        const sut = new NIndexMap([stringIndex], [mock1, mock2, mock3]);
+        expect(sut.getDefault()).toBeUndefined();
+        const defaultMock = createMock<TestInterface>();
+        sut.setDefault(defaultMock);
+        expect(sut.getDefault()).toEqual(defaultMock);
+        const unmatchingMock = createMock<TestInterface>();
+        expect(sut.getOrDefault(stringIndex, unmatchingMock.stringId)).toEqual(defaultMock);
+        sut.set(unmatchingMock);
+        expect(sut.getOrDefault(stringIndex, unmatchingMock.stringId)).toEqual(unmatchingMock);
+    });
 });
 
 describe("NIndexMap Input Validation", () => {

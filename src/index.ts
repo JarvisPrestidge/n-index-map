@@ -28,12 +28,21 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
     private readonly indexMap: Map<IndexedProp, Map<DataType[IndexedProp], number>> = new Map();
 
     /**
+     * The default data to return if specified
+     *
+     * @private
+     * @type {(DataType | undefined)}
+     */
+    private default: DataType | undefined;
+
+    /**
      * Creates an instance of NIndexMap.
      *
      * @param {IndexedProp[]} [indexKeys=[]] optional array of keys on the target object to index.
      * @param {DataType[]} [initialData=[]] optional array of initial data objects to store.
+     * @param {DataType} [defaultData] optional data item to return as default
      */
-    public constructor(indexKeys: IndexedProp[] = [], initialData: DataType[] = []) {
+    public constructor(indexKeys: IndexedProp[] = [], initialData: DataType[] = [], defaultData?: DataType) {
         this.indexMap = new Map(
             indexKeys.map((indexKey) => {
                 if (!isString(indexKey) && !isNumber(indexKey)) {
@@ -52,6 +61,8 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
         );
 
         this.seedIndexMap(...indexKeys);
+
+        this.default = defaultData;
     }
 
     /**
@@ -91,30 +102,59 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
     }
 
     /**
+     * Returns a element with the specified key and value (indexed or not) if it
+     * exits in the store, otherwise returns the default value when specified.
+     *
+     * @template NarrowProp
+     * @param {NarrowProp} key
+     * @param {DataType[NarrowProp]} value
+     * @returns {*}  {(DataType | undefined)}
+     */
+    public getOrDefault<NarrowProp extends IndexedProp>(
+        key: NarrowProp,
+        value: DataType[NarrowProp]
+    ): DataType | undefined {
+        return this.get(key, value) ?? this.default;
+    }
+
+    /**
+     * Return default value if specified
+     *
+     * @returns {*}  {(DataType | undefined)}
+     */
+    public getDefault(): DataType | undefined {
+        return this.default;
+    }
+
+    /**
      * Adds one or more elements to the NIndexMap store.
      *
      * @template T
      * @param {...T[]} dataItems
+     * @returns {*}  {this}
      */
-    public set<T extends DataType>(...dataItems: T[]): void {
+    public set<T extends DataType>(...dataItems: T[]): this {
         for (const dataItem of dataItems) {
-            if (!isObject(dataItem)) {
-                throw new Error("[N-INDEX-MAP ERROR] cannot set item as it is not an object");
-            }
-            for (const indexedProperty of this.indexMap.keys()) {
-                if (!dataItem.hasOwnProperty(indexedProperty)) {
-                    throw new Error("[N-INDEX-MAP ERROR] cannot set item as does not contain indexed properties");
-                }
-                if (this.has(indexedProperty, dataItem[indexedProperty])) {
-                    throw new Error("[N-INDEX-MAP ERROR] cannot set item as indexed prop values are not unique");
-                }
-            }
+            this.validateDataItem(dataItem);
             const newDataIndexId = this.dataMap.size;
             this.dataMap.set(newDataIndexId, dataItem);
             for (const [indexedProperty, indexPropertyMap] of this.indexMap) {
                 indexPropertyMap.set(dataItem[indexedProperty], newDataIndexId);
             }
         }
+        return this;
+    }
+
+    /**
+     * Set the default value to return
+     *
+     * @param {DataType} dataItem
+     * @returns {*}  {this}
+     */
+    public setDefault(dataItem: DataType): this {
+        this.validateDataItem(dataItem);
+        this.default = dataItem;
+        return this;
     }
 
     /**
@@ -123,8 +163,9 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
      *
      * @param {IndexedProp} key
      * @param {DataType[IndexedProp]} value
+     * @returns {*}  {this}
      */
-    public delete(key: IndexedProp, value: DataType[IndexedProp]): void {
+    public delete(key: IndexedProp, value: DataType[IndexedProp]): this {
         const indexPropertyMap = this.indexMap.get(key);
         if (isDefined(indexPropertyMap)) {
             const dataMapIndexId = indexPropertyMap.get(value);
@@ -136,7 +177,7 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
                         const dataPropertyValue = dataItem[indexedProperty];
                         indexPropertyMap.delete(dataPropertyValue);
                     }
-                    return;
+                    return this;
                 }
             }
         }
@@ -146,28 +187,33 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
                 this.dataMap.delete(indexId);
             }
         }
+        return this;
     }
 
     /**
      * Adds new index to maintain for all currently and future added elements.
      *
      * @param {IndexedProp} key
+     * @returns {*}  {this}
      */
-    public addIndex(key: IndexedProp): void {
+    public addIndex(key: IndexedProp): this {
         if (!this.indexMap.has(key)) {
             this.seedIndexMap(key);
         }
+        return this;
     }
 
     /**
      * Removes an exising index.
      *
      * @param {IndexedProp} key
+     * @returns {*}  {this}
      */
-    public removeIndex(key: IndexedProp): void {
+    public removeIndex(key: IndexedProp): this {
         if (this.indexMap.has(key)) {
             this.indexMap.delete(key);
         }
+        return this;
     }
 
     /**
@@ -213,11 +259,12 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
     /**
      * Clears all elements and indexes from the NIndexMap.
      *
-     * @returns {*}  {void}
+     * @returns {*}  {this}
      */
-    public clear(): void {
+    public clear(): this {
         this.dataMap.clear();
         this.indexMap.clear();
+        return this;
     }
 
     private seedIndexMap(...indexProperties: IndexedProp[]) {
@@ -230,6 +277,20 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
                 map.set(dataItem[indexProperty], index);
             }
             this.indexMap.set(indexProperty, map);
+        }
+    }
+
+    private validateDataItem(dataItem: DataType): void {
+        if (!isObject(dataItem)) {
+            throw new Error("[N-INDEX-MAP ERROR] cannot set item as it is not an object");
+        }
+        for (const indexedProperty of this.indexMap.keys()) {
+            if (!dataItem.hasOwnProperty(indexedProperty)) {
+                throw new Error("[N-INDEX-MAP ERROR] cannot set item as does not contain indexed properties");
+            }
+            if (this.has(indexedProperty, dataItem[indexedProperty])) {
+                throw new Error("[N-INDEX-MAP ERROR] cannot set item as indexed prop values are not unique");
+            }
         }
     }
 }
