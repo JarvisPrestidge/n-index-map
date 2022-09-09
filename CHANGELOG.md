@@ -1,5 +1,11 @@
 # n-index-map
 
+## 0.3.0
+
+### Minor Changes
+
+-   52293e8: add list and find utility functions
+
 ## 0.2.1
 
 ### Patch Changes
