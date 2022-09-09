@@ -247,6 +247,16 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
     }
 
     /**
+     * Returns a new array that contains the values for each element
+     * in the NIndexMap in insertion order.
+     *
+     * @returns {*}  {IterableIterator<DataType>}
+     */
+    public list(): DataType[] {
+        return Array.from(this.dataMap.values());
+    }
+
+    /**
      * Returns a new iterator object that contains the [key, value] pairs for
      * each element in the NIndexMap in insertion order. In this particular
      * case, this iterator object is also an iterable, so the for-of loop can be
@@ -256,6 +266,19 @@ class NIndexMap<DataType extends object, IndexedProp extends keyof DataType> {
      */
     public entries(): IterableIterator<[number, DataType]> {
         return this.dataMap.entries();
+    }
+
+    
+
+    /**
+     * Returns the first element in that satisfies the provided predicate. 
+     * If no values satisfy the testing function, undefined is returned.
+     *
+     * @param {(value: DataType, index: number, obj: DataType[]) => unknown} predicate
+     * @return {*}  {(DataType | undefined)}
+     */
+    public find(predicate: (value: DataType, index: number, obj: DataType[]) => unknown): DataType | undefined {
+        return [...this.values()].find(predicate);
     }
 
     /**
